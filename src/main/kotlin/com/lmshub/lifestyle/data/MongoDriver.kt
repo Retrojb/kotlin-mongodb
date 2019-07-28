@@ -1,29 +1,19 @@
 package com.lmshub.lifestyle.data
 
-import com.lmshub.lifestyle.data_classes.Person
 import com.mongodb.MongoClient
-import org.bson.BsonDocument
 import org.bson.Document
-import org.bson.conversions.Bson
 import org.bson.types.ObjectId
-import java.rmi.server.ObjID
 
-const val host = "127.0.0.1"
-const val port = 27017
-const val defaultDb = "lms-users"
+const val defaultDb = "lms-users-dev"
 
-class MongoDriver {
-    val mongoClient = MongoClient(host, port)
+class MongoDriver(mongoClient: MongoClient, db: String) {
+
     val db = mongoClient.getDatabase(defaultDb)
-    val personCollection = db.getCollection("person").toString()
-    val personOne =  "{userName: 'Retrojb', firstName: 'John', age: 30, email: 'email@email.com', relationshipstatus: false}"
-    val name = "name"
-//    val keysVals 'Any' to script provider.
 
-    //retrieve all documents from the db
     fun allFromCollection(collection: String): ArrayList<Map<String, Any>> {
         val mongoResult = db.getCollection(collection, Document::class.java)
         val result = ArrayList<Map<String, Any>>()
+
         mongoResult.find()
                 .forEach{
                     val collectionToMap: Map<String, Any> = dbDocToMap(it)
@@ -32,7 +22,7 @@ class MongoDriver {
         return result
     }
 
-    //Transform the doc to a map and changes all of the ids to strings if theyre of class ObjectId
+    //Transform the doc to a map and changes all of the ids to strings if they're of class ObjectId
     fun dbDocToMap(document: Document): Map<String, Any> {
         val collectionToMap: MutableMap<String, Any> = document.toMutableMap()
         if (collectionToMap.containsKey("_id")) {
