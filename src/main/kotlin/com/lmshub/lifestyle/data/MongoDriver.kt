@@ -34,5 +34,20 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         return collectionToMap
     }
 
+    fun addToCollection(){
+
+    }
+
+    fun updateCollection() {
+
+    }
+
+    fun deleteCollection() {
+
+    }
+    fun readCollection() {
+
+    }
+
 
 }

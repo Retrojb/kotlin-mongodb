@@ -38,18 +38,16 @@ val devUserPass = "lmsadmpass".toCharArray()
 
 private val mongoDataService = MongoDriver (
         mongoClientLocal, defaultDb
-    )
+)
 
 private val mongoDevDataService = MongoDriver (
         MongoClient (
             ServerAddress(devHost, devPort),
-            MongoCredential.createCredential(
-                    devUser, devDb, devUserPass
-            ),
+            MongoCredential.createCredential(devUser, devDb, devUserPass),
             MongoClientOptions.builder().build()
-        ),
-"lms-dev-db"
-    )
+            ),
+        "lms-dev-db"
+        )
 
 @Suppress("unused")
 @kotlin.jvm.JvmOverloads
@@ -74,13 +72,14 @@ fun Application.module(testing: Boolean = false) {
                 call.respond(
                         mongoDataService.allFromCollection("col")
                 )
-            }  //insert routes later
-            route(""){
-                get{
-                    call.respond(
-                            mongoDevDataService.allFromCollection("")
-                    )
-                }
+            }
+        }
+        //insert routes later
+        route(""){
+            get{
+                call.respond(
+                        mongoDevDataService.allFromCollection("")
+                )
             }
         }
 
