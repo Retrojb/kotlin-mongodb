@@ -3,6 +3,9 @@ package com.lmshub.lifestyle
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.mongodb.MongoClient
 import com.lmshub.lifestyle.data.MongoDriver
+import com.mongodb.MongoClientOptions
+import com.mongodb.MongoCredential
+import com.mongodb.ServerAddress
 import io.ktor.features.ContentNegotiation
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -17,19 +20,35 @@ import io.ktor.request.receiveText
 import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.*
-import org.bson.types.ObjectId
-
-import java.lang.Compiler.enable
 
 fun main(args: Array<String>): Unit =
         io.ktor.server.netty.EngineMain.main(args)
-
+//Local Environment
 const val host = "127.0.0.1"
 const val port = 27017
-val mongoClient = MongoClient(host, port)
+val mongoClientLocal = MongoClient(host, port)
+const val defaultDb = "lms-users-playground"
+const val devDb: String = "lms-dev-db"
+
+//Dev Environment
+const val devHost = " "
+const val devPort = 27029
+const val devUser = "lmsdbadm"
+val devUserPass = "lmsadmpass".toCharArray()
 
 private val mongoDataService = MongoDriver (
-        mongoClient, "lms-users-db"
+        mongoClientLocal, defaultDb
+    )
+
+private val mongoDevDataService = MongoDriver (
+        MongoClient (
+            ServerAddress(devHost, devPort),
+            MongoCredential.createCredential(
+                    devUser, devDb, devUserPass
+            ),
+            MongoClientOptions.builder().build()
+        ),
+"lms-dev-db"
     )
 
 @Suppress("unused")
@@ -40,4 +59,31 @@ fun Application.module(testing: Boolean = false) {
             enable(SerializationFeature.INDENT_OUTPUT)
         }
     }
+    //add this routing for static files later
+    routing {
+        static("tbd") {
+            resources("tbd")
+        }
+        install(StatusPages) {
+            exception<AuthenticationException> { cause ->
+                call.respond(HttpStatusCode.Unauthorized)
+            }
+        }
+        route("/Users/johnbaltes/Desktop/mongodb") {
+            get {
+                call.respond(
+                        mongoDataService.allFromCollection("col")
+                )
+            }  //insert routes later
+            route(""){
+                get{
+                    call.respond(
+                            mongoDevDataService.allFromCollection("")
+                    )
+                }
+            }
+        }
+
+    }
 }
+class AuthenticationException : RuntimeException()

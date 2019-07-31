@@ -9,7 +9,7 @@ const val defaultDb = "lms-users-dev"
 class MongoDriver(mongoClient: MongoClient, db: String) {
 
     val db = mongoClient.getDatabase(defaultDb)
-
+    
     fun allFromCollection(collection: String): ArrayList<Map<String, Any>> {
         val mongoResult = db.getCollection(collection, Document::class.java)
         val result = ArrayList<Map<String, Any>>()
