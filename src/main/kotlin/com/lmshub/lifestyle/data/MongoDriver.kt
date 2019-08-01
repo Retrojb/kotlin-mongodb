@@ -1,7 +1,10 @@
 package com.lmshub.lifestyle.data
 
 import com.mongodb.MongoClient
+import org.bson.BsonDocument
+import org.bson.BsonObjectId
 import org.bson.Document
+import org.bson.json.JsonParseException
 import org.bson.types.ObjectId
 
 const val defaultDb = "lms-users-dev"
@@ -34,9 +37,20 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         return collectionToMap
     }
 
-    fun addToCollection(){
-
+    //refactor build oid function as util
+    fun addToCollection(collection: String, document: String): String? {
+        try {
+            val bsonDocument = BsonDocument.parse(document)
+            bsonDocument.remove("_id")
+            val oid = ObjectId()
+            bsonDocument.put("_id", BsonObjectId(oid))
+            db.getCollection(collection, BsonDocument::class.java).insertOne(bsonDocument)
+            return oid.toHexString()
+        } catch(ex: JsonParseException) {
+            return "This is not the JSON we were looking for ${ex.localizedMessage}"
+        }
     }
+
 
     fun updateCollection() {
 

@@ -2,14 +2,14 @@ package com.lmshub.lifestyle
 
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.mongodb.MongoClient
-import com.lmshub.lifestyle.data.MongoDriver
 import com.mongodb.MongoClientOptions
 import com.mongodb.MongoCredential
 import com.mongodb.ServerAddress
-import io.ktor.features.ContentNegotiation
+import com.lmshub.lifestyle.data.MongoDriver
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -20,6 +20,7 @@ import io.ktor.request.receiveText
 import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.*
+import org.bson.types.ObjectId
 
 fun main(args: Array<String>): Unit =
         io.ktor.server.netty.EngineMain.main(args)
@@ -49,6 +50,7 @@ private val mongoDevDataService = MongoDriver (
         "lms-dev-db"
         )
 
+
 @Suppress("unused")
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
@@ -74,12 +76,22 @@ fun Application.module(testing: Boolean = false) {
                 )
             }
         }
-        //insert routes later
+//        insert routes later
         route(""){
             get{
                 call.respond(
                         mongoDevDataService.allFromCollection("")
                 )
+            }
+        }
+        post {
+            val documentAsString = call.receiveText()
+            val oidOrErrorMessage =
+                    mongoDataService.addToCollection("col", documentAsString)
+            if (ObjectId.isValid(oidOrErrorMessage)) {
+                call.respond(HttpStatusCode.Created, "201 - CREATED")
+            } else {
+                call.respond(HttpStatusCode.BadRequest, "400 - BAD REQUEST")
             }
         }
 
