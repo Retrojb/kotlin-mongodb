@@ -85,12 +85,27 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         }
     }
 
-    fun deleteCollection() {
-
+    fun deleteRemoveCollection(collection: String, id: String?, document: String): Pair<Int, String> {
+        if (!ObjectId.isValid(id)) {
+            return Pair(0, "Yo that ID ain't real!")
+        }
+        val filter = BsonDocument("_id", BsonObjectId(ObjectId(id)))
+        val uv = db.getCollection(collection)
+                .deleteOne(filter)
+                .deletedCount
+        if(uv < 1) {
+            return Pair(0, "Dude where's my ID")
+        } else {
+            return Pair(1, "FERDA")
+        }
     }
-    fun readCollection() {
 
-    }
+    
+//    fun readCollection() {
+//        if (!ObjectId.isValid(id)) {
+//            return Pair(0, "Yo that ID ain't real!")
+//        }
+//    }
 
 
 }
