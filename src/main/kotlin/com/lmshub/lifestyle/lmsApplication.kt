@@ -27,8 +27,8 @@ import org.bson.types.ObjectId
 const val host = "127.0.0.1"
 const val port = 27017
 val mongoClientLocal = MongoClient(host, port)
-const val defaultDb = "lms-users-playground"
-const val devDb: String = "lms-dev-db"
+const val defaultDb = "lmsDevData"
+const val devDb: String = "lmsDevData"
 
 //Dev Environment
 const val devHost = ""
@@ -46,7 +46,7 @@ private val mongoDevDataService = MongoDriver (
             MongoCredential.createCredential(devUser, devDb, devUserPass),
             MongoClientOptions.builder().build()
             ),
-        "lms-dev-db"
+        "lmsDevData"
         )
 
 fun main(args: Array<String>) =
@@ -96,6 +96,7 @@ fun Application.module() {
 //    val client = HttpClient(Jetty) {
 //    }
     //add this routing for static files later
+    //REST exposure  see if we can move this off the main
     routing {
         static("/static") {
             resources("static")
@@ -105,32 +106,37 @@ fun Application.module() {
                 call.respond(HttpStatusCode.Unauthorized)
             }
         }
-        route("/data/db") {
+        route("/data/lmsDevData") {
             get {
                 call.respond(
-                        mongoDataService.allFromCollection("col")
-                )
-            }
-        }
-//        insert routes later
-        route(""){
-            get{
-                call.respond(
-                        mongoDevDataService.allFromCollection("")
+                        mongoDataService.allFromCollection("person")
                 )
             }
         }
         post {
             val documentAsString = call.receiveText()
             val oidOrErrorMessage =
-                    mongoDataService.addToCollection("col", documentAsString)
+                    mongoDataService.addNewDocument("person", documentAsString)
             if (ObjectId.isValid(oidOrErrorMessage)) {
                 call.respond(HttpStatusCode.Created, "201 - CREATED")
             } else {
                 call.respond(HttpStatusCode.BadRequest, "400 - BAD REQUEST")
             }
         }
+        get("/{id}") {
+            val id: String? = call.parameters["id"]
+            val doc = mongoDataService.getDocumentById("person", id)
+            if (doc != null) {
+                call.respond(doc)
+            } else {
+                call.respond(HttpStatusCode.NotFound)
+            }
+        }
+
 
     }
+
+
 }
+
 class AuthenticationException : RuntimeException()
