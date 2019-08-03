@@ -25,13 +25,15 @@ ktor {
 This is the basics for the file, giving it the deployment ports, and I left the application module blank to verify that it works
 the really application module that works is still TBD as of 8/1/19 by me. 
 
-Other add-ons to the `application.conf` file for mongo
+Other add-ons to the `application.conf` file for mongo.
+THIS WORKS
 ```
 mongo {
   connectionString = “mongodb://127.0.0.1:27017”
 }
 ```
-
+## WHEN COPYING AND PASTING
+MAKE SURE TO CHECK YOU `" "` as they will be skewed from the copying, even if it's direct from a code block.
 ```
 watch = [ “kotlin-ktor-mongo-db”]
 ```
