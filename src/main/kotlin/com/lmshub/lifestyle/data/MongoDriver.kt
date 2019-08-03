@@ -66,7 +66,7 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
 
     fun updateDocument( collection: String, id: String?, document: String): Pair<Int, String> {
         try {
-            if (!ObjectId.isValid()) {
+            if (!ObjectId.isValid(id)) {
                 return Pair(0, "Yo that ID ain't real!")
             }
             val bsonDocument = BsonDocument.parse(document)
