@@ -17,7 +17,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 sourceSets {
-	mainClassName = 'com.lmshub.lifestyle.lmsAppliation.kt'
+	mainClassName = "com.lmshub.lifestyle.lmsAppliationKt"
 
 
 }
@@ -47,7 +47,18 @@ dependencies {
 	compile "io.ktor:ktor-server-host-common:$ktor_version"
 	compile "io.ktor:ktor-jackson:$ktor_version"
 	compile "org.mongodb:mongodb-driver:3.6.3"
+	compile "io.ktor:ktor-html-builder:$ktor_version"
+	compile "org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41"
+	compile "io.ktor:ktor-server-host-common:$ktor_version"
+	compile "io.ktor:ktor-locations:$ktor_version"
+	compile "io.ktor:ktor-client-core:$ktor_version"
+	compile "io.ktor:ktor-client-core-jvm:$ktor_version"
+	compile "io.ktor:ktor-client-jetty:$ktor_version"
 	implementation "org.jetbrains.kotlin:kotlin-reflect"
 
+	testCompile "io.ktor:ktor-server-tests:$ktor_version"
+	testCompile "io.ktor:ktor-client-mock:$ktor_version"
+	testCompile "io.ktor:ktor-client-mock-jvm:$ktor_version"
 	testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
