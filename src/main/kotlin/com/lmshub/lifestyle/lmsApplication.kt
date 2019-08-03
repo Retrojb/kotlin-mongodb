@@ -132,6 +132,16 @@ fun Application.module() {
                 call.respond(HttpStatusCode.NotFound)
             }
         }
+        patch("/{id}") {
+            val id: String? = call.parameters["id"]
+            val documentAsString = call.receiveText()
+            val (uv, message) = mongoDataService.updateDocument("person", id, documentAsString)
+            when (uv) {
+                -1 -> call.respond(HttpStatusCode.BadRequest, message)
+                0 -> call.respond(HttpStatusCode.NotFound, message)
+                1 -> call.respond(HttpStatusCode.NoContent)
+            }
+        }
 
 
     }
