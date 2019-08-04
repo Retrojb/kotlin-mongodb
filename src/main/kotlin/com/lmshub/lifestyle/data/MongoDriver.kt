@@ -85,7 +85,7 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         }
     }
 
-    fun deleteRemoveCollection(collection: String, id: String?, document: String): Pair<Int, String> {
+    fun deleteRemoveCollection(collection: String, id: String?): Pair<Int, String> {
         if (!ObjectId.isValid(id)) {
             return Pair(0, "Yo that ID ain't real!")
         }
@@ -100,7 +100,7 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         }
     }
 
-    
+
 //    fun readCollection() {
 //        if (!ObjectId.isValid(id)) {
 //            return Pair(0, "Yo that ID ain't real!")

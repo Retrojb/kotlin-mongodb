@@ -22,6 +22,7 @@ import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.*
 import org.bson.types.ObjectId
+import org.eclipse.jetty.http.HttpStatus
 
 //Local Environment
 const val host = "127.0.0.1"
@@ -138,6 +139,15 @@ fun Application.module() {
             val (uv, message) = mongoDataService.updateDocument("person", id, documentAsString)
             when (uv) {
                 -1 -> call.respond(HttpStatusCode.BadRequest, message)
+                0 -> call.respond(HttpStatusCode.NotFound, message)
+                1 -> call.respond(HttpStatusCode.NoContent)
+            }
+        }
+        delete("/id") {
+            val id: String? = call.parameters["id"]
+            val (uv, message) = mongoDataService
+                    .deleteRemoveCollection("person", id)
+            when (uv) {
                 0 -> call.respond(HttpStatusCode.NotFound, message)
                 1 -> call.respond(HttpStatusCode.NoContent)
             }
