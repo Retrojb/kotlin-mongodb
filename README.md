@@ -5,6 +5,9 @@ Key issues faced:
 application.conf causing `Main class` issues while trying to run it in IntelliJ
 Make sure that you check that when you build and run any Kotlin project in IntelliJ that all of the enivormental variables
 upon build Kotlin will generate a directory called `out` inside of out follow the route to the `out/prod/class/com.project.demo/<ApplicationKt.class>`
+
+https://ktor.io/servers/configuration
+
 exists, also check in the resource folder in the `out` directory that there is a file called `application.conf`
 
 
