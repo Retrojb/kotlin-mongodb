@@ -37,8 +37,20 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         return collectionToMap
     }
 
+    fun getDocumentById(collection: String, id: String?): Map<String, Any>? {
+        if (!ObjectId.isValid(id)) {
+            return null
+        }
+        val document = db.getCollection(collection)
+                .find(Document("_id", ObjectId(id)))
+        if (document != null && document.first() != null) {
+            return dbDocToMap(document.first())
+        }
+        return null
+    }
+
     //refactor build oid function as util
-    fun addToCollection(collection: String, document: String): String? {
+    fun addNewDocument(collection: String, document: String): String? {
         try {
             val bsonDocument = BsonDocument.parse(document)
             bsonDocument.remove("_id")
@@ -52,16 +64,48 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
     }
 
 
-    fun updateCollection() {
-
+    fun updateDocument( collection: String, id: String?, document: String): Pair<Int, String> {
+        try {
+            if (!ObjectId.isValid(id)) {
+                return Pair(0, "Yo that ID ain't real!")
+            }
+            val bsonDocument = BsonDocument.parse(document)
+            bsonDocument.remove("_id")
+            val filter = BsonDocument("_id", BsonObjectId(ObjectId(id)))
+            val updatedValues = db.getCollection(collection, BsonDocument::class.java)
+                    .replaceOne(filter, bsonDocument)
+                    .modifiedCount
+            if(updatedValues > 1 ) {
+                return Pair(0, "Dude where's my ID")
+            } else {
+                return Pair(1, "FERDA!!!")
+            }
+        } catch (ex: JsonParseException){
+            return Pair(-1, "th JSON: ${ex.localizedMessage}")
+        }
     }
 
-    fun deleteCollection() {
-
+    fun deleteRemoveCollection(collection: String, id: String?): Pair<Int, String> {
+        if (!ObjectId.isValid(id)) {
+            return Pair(0, "Yo that ID ain't real!")
+        }
+        val filter = BsonDocument("_id", BsonObjectId(ObjectId(id)))
+        val uv = db.getCollection(collection)
+                .deleteOne(filter)
+                .deletedCount
+        if(uv < 1) {
+            return Pair(0, "Dude where's my ID")
+        } else {
+            return Pair(1, "FERDA")
+        }
     }
-    fun readCollection() {
 
-    }
+
+//    fun readCollection() {
+//        if (!ObjectId.isValid(id)) {
+//            return Pair(0, "Yo that ID ain't real!")
+//        }
+//    }
 
 
 }
