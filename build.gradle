@@ -48,7 +48,7 @@ dependencies {
 	compile "io.ktor:ktor-jackson:$ktor_version"
 	compile "org.mongodb:mongodb-driver:3.6.3"
 	compile "io.ktor:ktor-html-builder:$ktor_version"
-	compile "org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41"
+	//compile "org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41"
 	compile "io.ktor:ktor-server-host-common:$ktor_version"
 	compile "io.ktor:ktor-locations:$ktor_version"
 	compile "io.ktor:ktor-client-core:$ktor_version"
