@@ -20,6 +20,7 @@ export class DynamicFormComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.createControl();
   }
 
   createControl() {
@@ -46,7 +47,22 @@ export class DynamicFormComponent implements OnInit {
     return null;
   }
 
-  onSubmit() {
-
+  onSubmit(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.form.valid) {
+      this.submit.emit(this.form.value);
+    } else {
+      this.validateAllFormFields(this.form);
+    }
   }
+
+  validateAllFormFields(fg: FormGroup) {
+    Object.keys(fg.controls)
+    .forEach(field => {
+      const ctl = fg.get(field);
+      ctl.markAsTouched({ onlySelf: true });
+    });
+  }
+
 }
