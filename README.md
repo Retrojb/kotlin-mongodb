@@ -42,6 +42,12 @@ watch = [ “kotlin-ktor-mongo-db”]
 ```
 
 
+
+## IntelliJ: 
+Get the mongo explorer plugin
+To connect: 
+    `+` --> `server url` --> `db` 
+=======
 ## Gradle issues:
 
 Added ext version_variables in build script
