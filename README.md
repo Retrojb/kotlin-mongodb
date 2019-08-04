@@ -5,7 +5,7 @@ Key issues faced:
 application.conf causing `Main class` issues while trying to run it in IntelliJ
 Make sure that you check that when you build and run any Kotlin project in IntelliJ that all of the enivormental variables
 upon build Kotlin will generate a directory called `out` inside of out follow the route to the `out/prod/class/com.project.demo/<ApplicationKt.class>`
-exists, also check in the resource folder in teh `out` directory that there is a file called `application.conf`
+exists, also check in the resource folder in the `out` directory that there is a file called `application.conf`
 
 
 Basic `application.conf`
@@ -37,3 +37,10 @@ MAKE SURE TO CHECK YOU `" "` as they will be skewed from the copying, even if it
 ```
 watch = [ “kotlin-ktor-mongo-db”]
 ```
+
+
+## Gradle issues:
+
+Added ext version_variables in build script
+make sure to set you source set main set. This may be required when cloning the project
+ktor requires `jcenter()` and a `mav {url 'https://kotlin.bintray.com/ktor'}`
