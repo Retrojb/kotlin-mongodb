@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -10,14 +9,10 @@ import { PersonService } from './services/person.service';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { InputComponent } from './forms/input/input.component';
-import { ButtonComponent } from './forms/button/button.component';
-import { SelectComponent } from './forms/select/select.component';
-import { DateComponent } from './forms/date/date.component';
-import { RadBtnComponent } from './forms/rad-btn/rad-btn.component';
-import { CheckBoxComponent } from './forms/check-box/check-box.component';
-import { DynamicFieldsComponent } from './forms/dynamic-fields/dynamic-fields.component';
 import { DynamicFieldsDirective } from './forms/dynamic-fields.directive';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +20,11 @@ import { DynamicFieldsDirective } from './forms/dynamic-fields.directive';
     HomeComponent,
     PersonComponent,
     RegisterComponent,
-    InputComponent,
-    ButtonComponent,
-    SelectComponent,
-    DateComponent,
-    RadBtnComponent,
-    CheckBoxComponent,
-    DynamicFieldsComponent,
-    DynamicFieldsDirective
+    DynamicFieldsDirective,
+    DynamicFormComponent
+  ],
+  schemas: [
+    NO_ERRORS_SCHEMA
   ],
   imports: [
     BrowserModule,
@@ -51,4 +43,5 @@ import { DynamicFieldsDirective } from './forms/dynamic-fields.directive';
     AppComponent
   ]
 })
+
 export class AppModule { }
