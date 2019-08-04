@@ -37,3 +37,9 @@ MAKE SURE TO CHECK YOU `" "` as they will be skewed from the copying, even if it
 ```
 watch = [ “kotlin-ktor-mongo-db”]
 ```
+
+
+## IntelliJ: 
+Get the mongo explorer plugin
+To connect: 
+    `+` --> `server url` --> `db` 

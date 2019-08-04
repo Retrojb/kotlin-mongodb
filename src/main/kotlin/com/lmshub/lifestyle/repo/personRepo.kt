@@ -1,4 +1,6 @@
 package com.lmshub.lifestyle.repo
 
-object person {
+object personRepo {
+
+
 }

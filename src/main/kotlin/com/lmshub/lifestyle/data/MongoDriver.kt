@@ -13,21 +13,22 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
 
     val db = mongoClient.getDatabase(defaultDb)
     
-    fun allFromCollection(collection: String): ArrayList<Map<String, Any>> {
-        val mongoResult = db.getCollection(collection, Document::class.java)
-        val result = ArrayList<Map<String, Any>>()
+    fun allFromCollection(col: String): ArrayList<Map<String, Any>> {
+        val mongoRes = db.getCollection(col, Document::class.java)
+        val res = ArrayList<Map<String, Any>>()
 
-        mongoResult.find()
+        mongoRes.find()
                 .forEach{
                     val collectionToMap: Map<String, Any> = dbDocToMap(it)
-                    result.add(collectionToMap)
+                    res.add(collectionToMap)
                 }
-        return result
+        return res
     }
 
     //Transform the doc to a map and changes all of the ids to strings if they're of class ObjectId
-    fun dbDocToMap(document: Document): Map<String, Any> {
-        val collectionToMap: MutableMap<String, Any> = document.toMutableMap()
+    fun dbDocToMap(doc: Document): Map<String, Any> {
+        val collectionToMap: MutableMap<String, Any> = doc.toMutableMap()
+
         if (collectionToMap.containsKey("_id")) {
             val id = collectionToMap.getValue("_id")
             if (id is ObjectId) {
@@ -37,26 +38,26 @@ class MongoDriver(mongoClient: MongoClient, db: String) {
         return collectionToMap
     }
 
-    fun getDocumentById(collection: String, id: String?): Map<String, Any>? {
+    fun getDocumentById(col: String, id: String?): Map<String, Any>? {
         if (!ObjectId.isValid(id)) {
             return null
         }
-        val document = db.getCollection(collection)
+        val document = db.getCollection(col)
                 .find(Document("_id", ObjectId(id)))
-        if (document != null && document.first() != null) {
+        if (document?.first() != null) {
             return dbDocToMap(document.first())
         }
         return null
     }
 
-    //refactor build oid function as util
-    fun addNewDocument(collection: String, document: String): String? {
+
+    fun addNewDocument(col: String, doc: String): String? {
         try {
-            val bsonDocument = BsonDocument.parse(document)
-            bsonDocument.remove("_id")
+            val bsonDoc = BsonDocument.parse(doc)
+            bsonDoc.remove("_id")
             val oid = ObjectId()
-            bsonDocument.put("_id", BsonObjectId(oid))
-            db.getCollection(collection, BsonDocument::class.java).insertOne(bsonDocument)
+            bsonDoc.put("_id", BsonObjectId(oid))
+            db.getCollection(col, BsonDocument::class.java).insertOne(bsonDoc)
             return oid.toHexString()
         } catch(ex: JsonParseException) {
             return "This is not the JSON we were looking for ${ex.localizedMessage}"
