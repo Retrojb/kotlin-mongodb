@@ -14,7 +14,7 @@ MatSelectModule,
 MatOptionModule,
 MatCheckboxModule,
 MatRadioModule
-} from "@angular/material";
+} from '@angular/material';
 
 @NgModule({
   declarations: [],
