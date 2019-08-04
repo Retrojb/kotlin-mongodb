@@ -12,6 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { InputComponent } from './forms/input/input.component';
 import { ButtonComponent } from './forms/button/button.component';
+import { SelectComponent } from './forms/select/select.component';
+import { DateComponent } from './forms/date/date.component';
+import { RadBtnComponent } from './forms/rad-btn/rad-btn.component';
+import { CheckBoxComponent } from './forms/check-box/check-box.component';
+import { DynamicFieldsComponent } from './forms/dynamic-fields/dynamic-fields.component';
+import { DynamicFieldsDirective } from './forms/dynamic-fields.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import { ButtonComponent } from './forms/button/button.component';
     PersonComponent,
     RegisterComponent,
     InputComponent,
-    ButtonComponent
+    ButtonComponent,
+    SelectComponent,
+    DateComponent,
+    RadBtnComponent,
+    CheckBoxComponent,
+    DynamicFieldsComponent,
+    DynamicFieldsDirective
   ],
   imports: [
     BrowserModule,

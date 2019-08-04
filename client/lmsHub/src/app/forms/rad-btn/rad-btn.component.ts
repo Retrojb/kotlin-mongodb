@@ -3,11 +3,11 @@ import { FieldConfig } from '../field.interface';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  selector: 'app-rad-btn',
+  templateUrl: './rad-btn.component.html',
+  styleUrls: ['./rad-btn.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class RadBtnComponent implements OnInit {
 
   field: FieldConfig;
   group: FormGroup;

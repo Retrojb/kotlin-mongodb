@@ -3,11 +3,11 @@ import { FieldConfig } from '../field.interface';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  selector: 'app-check-box',
+  templateUrl: './check-box.component.html',
+  styleUrls: ['./check-box.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class CheckBoxComponent implements OnInit {
 
   field: FieldConfig;
   group: FormGroup;

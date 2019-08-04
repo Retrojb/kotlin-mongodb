@@ -3,11 +3,11 @@ import { FieldConfig } from '../field.interface';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class SelectComponent implements OnInit {
 
   field: FieldConfig;
   group: FormGroup;
