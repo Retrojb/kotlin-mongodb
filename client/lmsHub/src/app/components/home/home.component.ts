@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   }
 
   popup() {
-    const welcomeMessage = "You have made it to the home page"
+    const welcomeMessage = 'You have made it to the home page';
     const alarm = alert(welcomeMessage);
     console.log(welcomeMessage);
     return alarm;

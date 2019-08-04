@@ -7,10 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class PersonService {
 
+  personUrl = 'localhost:4200/person';
+
   constructor(private http: HttpClient) { }
 
 getAllDocs(): Observable<any> {
-  return this.http.get('//localhost:8080/person');
+  return this.http.get(this.personUrl);
 }
 
 }
