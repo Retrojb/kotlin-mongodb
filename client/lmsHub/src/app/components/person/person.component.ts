@@ -12,10 +12,18 @@ export class PersonComponent implements OnInit {
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
+  }
+
+  getAllPeople() {
     this.personService.getAllDocs()
-    .subscribe(data => {
-      this.persons = data;
+    .subscribe(p => {
+      this.persons = p;
     });
   }
+  getAPerson(){
+  this.personService.getAllDocs()
+
+  }
+
 
 }
