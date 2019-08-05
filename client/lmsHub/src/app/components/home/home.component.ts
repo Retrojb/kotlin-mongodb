@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PersonService } from 'src/app/services/person.service';
-import { PersonComponent } from '../person/person.component';
+import { DynamicFormComponent } from '../../forms/dynamic-form/dynamic-form.component';
 
 
 @Component({
@@ -9,10 +9,15 @@ import { PersonComponent } from '../person/person.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  private dynamicForm: DynamicFormComponent;
 
-  constructor(person: PersonService) { }
+  constructor( private person: PersonService,
+               private dfc: DynamicFormComponent) {
+                 console.log('this is active');
+  }
 
   ngOnInit() {
+    // this.dynamicForm.onSubmit();
   }
 
   popup() {

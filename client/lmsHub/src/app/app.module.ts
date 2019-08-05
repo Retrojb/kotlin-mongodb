@@ -13,6 +13,12 @@ import { DynamicFieldsDirective } from './forms/dynamic-fields.directive';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
+import { InputComponent } from './forms/input/input.component';
+import { ButtonComponent } from './forms/button/button.component';
+import { SelectComponent } from './forms/select/select.component';
+import { DateComponent } from './forms/date/date.component';
+import { RadBtnComponent } from './forms/rad-btn/rad-btn.component';
+import { CheckBoxComponent } from './forms/check-box/check-box.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,8 @@ import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.componen
     PersonComponent,
     RegisterComponent,
     DynamicFieldsDirective,
-    DynamicFormComponent
+    DynamicFormComponent,
+
   ],
   schemas: [
     NO_ERRORS_SCHEMA
@@ -41,6 +48,14 @@ import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.componen
   ],
   bootstrap: [
     AppComponent
+  ],
+  entryComponents: [
+    InputComponent,
+    ButtonComponent,
+    SelectComponent,
+    DateComponent,
+    RadBtnComponent,
+    CheckBoxComponent
   ]
 })
 
