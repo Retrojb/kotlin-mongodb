@@ -7,16 +7,21 @@ import { HomeComponent } from './components/home/home.component';
 import { PersonComponent } from './components/person/person.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PersonService } from './services/person.service';
+import { RegistrationFormComponent } from './containers/registration-form/registration-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PersonComponent  ],
+    PersonComponent,
+    RegistrationFormComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [PersonService],
   bootstrap: [AppComponent]
