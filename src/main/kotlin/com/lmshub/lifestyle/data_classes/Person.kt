@@ -1,9 +1,10 @@
 package com.lmshub.lifestyle.data_classes
 
 data class Person(var userName: String,
-                  var firstName: String,
-                  var age: Int,
                   var email: String,
+                  var firstName: String,
+                  var lastName: String,
+                  var age: Int,
                   var relationStatus: Boolean?) {
 
     companion object {
@@ -15,7 +16,7 @@ data class Person(var userName: String,
                 Person::relationStatus)
         }
 
-    override fun toString(): String = "$userName, $firstName, $age, $email, $relationStatus"
+    override fun toString(): String = "User name: $userName, Email: $email, $firstName, $lastName, $age, $relationStatus"
 }
 
 
