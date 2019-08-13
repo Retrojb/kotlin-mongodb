@@ -13,8 +13,6 @@ import { SelectComponent } from './select/select.component';
 import { DateComponent } from './date/date.component';
 import { RadBtnComponent } from './rad-btn/rad-btn.component';
 import { FieldConfig } from './field.interface';
-import { container } from '@angular/core/src/render3';
-import { group } from 'console';
 
 const componentMapper = {
   input: InputComponent,

@@ -9,11 +9,10 @@ import { DynamicFormComponent } from '../../forms/dynamic-form/dynamic-form.comp
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  private dynamicForm: DynamicFormComponent;
 
-  constructor( private person: PersonService,
-               private dfc: DynamicFormComponent) {
-                 console.log('this is active');
+
+  constructor( private person: PersonService) {
+
   }
 
   ngOnInit() {

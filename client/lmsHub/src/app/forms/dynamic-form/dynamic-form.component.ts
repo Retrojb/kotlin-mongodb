@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { FieldConfig, Validator } from '../field.interface';
-import { validateHorizontalPosition } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -15,7 +14,12 @@ export class DynamicFormComponent implements OnInit {
 
   form: FormGroup;
 
+  public registrationForm = new FormGroup({
+    userName: new FormControl('', {validators: Validators.required}),
+    firstName: new FormControl('', {validators: Validators.required})
+  });
   get value() { return this.form.value; }
+
 
   constructor(private fb: FormBuilder) { }
 
