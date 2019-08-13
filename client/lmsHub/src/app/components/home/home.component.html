@@ -1,21 +1,9 @@
 <div>
   <div>
-    <h1>FUCK A GOAT</h1>
-</div>
-</div>
-<div class="form">
-  <div style="text-align:center">
-  <h3>
-    Registration Form
-  </h3>
-  <app-register></app-register>
-  </div>
-<form [appDynamicForm]></form>
-<form class="dynamic-form" [formGroup]="form" (submit)="onSubmit($event)">
-  <ng-container *ngFor="let field of fields;" dynamicField
-  [field]="field" [group]="form">
-  </ng-container>
-</form>
+    <h1>Welcome to Lifestyles Management</h1>
   </div>
 
-
+  <div>
+    <registration-form></registration-form>
+  </div>
+</div>
