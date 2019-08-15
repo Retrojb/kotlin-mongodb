@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div>
-        <h2>Register for Lifestyle Management</h2>
+        <h4>Register for Lifestyle Management</h4>
         <form [formGroup]="registrationForm" (submit)="onSubmit()">
 
-          <div class="form-group">
-            <label>User name</label>
+          <div class="this">
+            <label>User name </label>
             <input type="text" formControlName="control" [ngClass]="{ 'is-invalid': submitted && form.userName.errors }" />
             <div *ngIf="submitted && !!form?.errors.required" class="invalid-feedback">
                 <div *ngIf="!!form?.userName.required">User name required </div> <!-- the !! casts form as a boolean, because submit is a boolean-->
@@ -14,7 +14,7 @@
           </div>
 
           <div class="form-group">
-            <label>First name</label>
+            <label>First name </label>
               <input type="text" formControlName="control" [ngClass]="{ 'is-invalid': submitted && form.firstName.errors }" />
               <div *ngIf="submitted && !!form.errors.required" class="invalid-feedback">
                   <div *ngIf="!!form?.firstName.required">First name required </div>
@@ -22,7 +22,7 @@
           </div>
 
           <div class="form-group">
-            <label>Last name</label>
+            <label>Last name </label>
               <input type="text" formControlName="control" [ngClass]="{ 'is-invalid': submitted && form.lastName.errors }" />
               <div *ngIf="submitted && !!form.errors.required" class="invalid-feedback">
                   <div *ngIf="!!form.lastName.required">Last name required </div>
@@ -30,7 +30,7 @@
           </div>
 
           <div class="form-group">
-            <label>Email</label>
+            <label>Email </label>
               <input type="text" formControlName="control" [ngClass]="{ 'is-invalid': submitted && form.email.errors }" />
               <div *ngIf="submitted && !!form.errors.required" class="invalid-feedback">
                   <div *ngIf="!!form.email.required">Email required </div>
